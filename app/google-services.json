@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "690910201711",
+    "firebase_url": "https://productlist-14e9f.firebaseio.com",
+    "project_id": "productlist-14e9f",
+    "storage_bucket": "productlist-14e9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690910201711:android:b725b76aa4ada78ab88a9a",
+        "android_client_info": {
+          "package_name": "com.example.inlocker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690910201711-lk2i0juddd4q3i1rqm9oi3oof8pqcs4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlFfQGfzPGfAmxbwigpa0gB1rNyN9Aq28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690910201711-lk2i0juddd4q3i1rqm9oi3oof8pqcs4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690910201711:android:df78c7c60f61c33eb88a9a",
+        "android_client_info": {
+          "package_name": "com.example.inlocker_shopkeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690910201711-lk2i0juddd4q3i1rqm9oi3oof8pqcs4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlFfQGfzPGfAmxbwigpa0gB1rNyN9Aq28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690910201711-lk2i0juddd4q3i1rqm9oi3oof8pqcs4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

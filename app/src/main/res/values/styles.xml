@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/red</item>
+        <!-- <item name="colorSecondary">@color/bone</item> -->
+        <item name="colorAccent">@color/black</item>
+
+        <item name="android:windowBackground">@color/red</item>
+
+        <item name="buttonStyle">@style/PrimaryButton</item>
+        <item name="editTextStyle">@style/customEditText</item>
+        <!--setting the name to android:editTextStyle doesn't work haha idk why -->
+
+        <item name="android:imageButtonStyle">?android:borderlessButtonStyle</item>
+    </style>
+
+
+    <!-- custom styles for buttons, and it's now the default style for buttons -->
+    <style name="PrimaryButton" parent="android:style/Widget.Button">
+        <item name="android:background">@drawable/layout_rounded_buttons</item>
+        <item name="android:backgroundTint">@color/bone</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">25dp</item>
+        <item name="android:paddingRight">25dp</item>
+    </style>
+
+    <style name="SecondaryButton" parent="@style/PrimaryButton">
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- custom style for text fields -->
+    <style name="customEditText" parent="android:style/Widget.EditText">
+        <item name="android:background">@drawable/layout_rounded_edittext</item>
+        <item name="android:ems">16</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:paddingStart">15dp</item>
+    </style>
+</resources>

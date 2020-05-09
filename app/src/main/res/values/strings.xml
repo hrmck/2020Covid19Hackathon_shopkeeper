@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">InLocker_shopkeeper</string>
+
+    <string name="uid">User ID</string>
+    <string name="pwd">Password</string>
+    <string name="pwd_c">Confirm Password</string>
+    <string name="forgot_pwd">forgot password?</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign-up</string>
+    <string name="emailAdr">Email address</string>
+
+    <string name="view_store">View Store</string>
+    <string name="edit_store">Edit Store</string>
+    <string name="finished_order">Finished Orders</string>
+
+    <string name="preview">Preview</string>
+
+    <string name="storeInfo">Store Info</string>
+    <string name="saveInfo">Save Info</string>
+    <string name="storeName">Store Name</string>
+    <string name="phoneNo">Phone number</string>
+    <string name="address">Store address</string>
+</resources>
