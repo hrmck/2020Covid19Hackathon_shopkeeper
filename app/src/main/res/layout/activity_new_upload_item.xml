@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewUploadItemActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/itemName_NewUploadItem_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="@string/itemName"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/itemPrice_NewUploadItem_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/itemPrice"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemName_NewUploadItem_editText" />
+
+        <Button
+            android:id="@+id/itemClear_NewUploadItemBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/itemClearContents"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/itemSave_NewUploadItemBtn"
+            app:layout_constraintTop_toBottomOf="@+id/itemCategory_NewUploadItem_spinner" />
+
+        <Button
+            android:id="@+id/itemSave_NewUploadItemBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/itemSave"
+            app:layout_constraintEnd_toStartOf="@+id/itemClear_NewUploadItemBtn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemCategory_NewUploadItem_spinner" />
+
+        <Spinner
+            android:id="@+id/itemCategory_NewUploadItem_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/itemPrice_NewUploadItem_editText"
+            app:layout_constraintStart_toStartOf="@+id/itemPrice_NewUploadItem_editText"
+            app:layout_constraintTop_toBottomOf="@+id/itemPrice_NewUploadItem_editText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

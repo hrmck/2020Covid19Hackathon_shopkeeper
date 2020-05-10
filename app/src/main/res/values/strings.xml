@@ -14,10 +14,24 @@
     <string name="finished_order">Finished Orders</string>
 
     <string name="preview">Preview</string>
+    <string name="addNewItem">Add New Product</string>
 
     <string name="storeInfo">Store Info</string>
     <string name="saveInfo">Save Info</string>
     <string name="storeName">Store Name</string>
     <string name="phoneNo">Phone number</string>
     <string name="address">Store address</string>
+
+    <string name="itemName">Item name</string>
+    <string name="itemPrice">Item price</string>
+    <string-array name="itemCategory">
+        <item>--Please choose--</item>
+        <item>Drinks</item>
+        <item>Clothes</item>
+        <item>Stationery</item>
+        <item>Drugs</item>
+        <item>Daily Essentials</item>
+    </string-array>
+    <string name="itemSave">Save</string>
+    <string name="itemClearContents">Clear</string>
 </resources>
