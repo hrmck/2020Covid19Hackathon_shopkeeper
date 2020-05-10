@@ -42,6 +42,10 @@ public class StoreItemAdapter extends FirestoreRecyclerAdapter<StoreItem, StoreI
         return new StoreItemHolder(v);
     }
 
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
     class StoreItemHolder extends RecyclerView.ViewHolder {
         TextView textViewItemName;
         TextView textViewItemPrice;
