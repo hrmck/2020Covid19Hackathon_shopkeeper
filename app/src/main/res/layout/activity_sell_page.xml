@@ -34,21 +34,10 @@
         style="@style/SecondaryButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/view_store"
+        android:text="@string/view_edit_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/vertical1_sellPage_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontal2_sellPage_guideline" />
-
-    <Button
-        android:id="@+id/toSellerUpload_sellPageBtn"
-        style="@style/SecondaryButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/edit_store"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/vertical2_sellPage_guideline"
-        app:layout_constraintStart_toStartOf="@+id/vertical1_sellPage_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal2_sellPage_guideline" />
 
     <Button
@@ -59,7 +48,7 @@
         android:text="@string/finished_order"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical2_sellPage_guideline"
+        app:layout_constraintStart_toStartOf="@+id/vertical1_sellPage_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal2_sellPage_guideline"
         app:layout_constraintVertical_bias="0.5" />
 
@@ -68,14 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.33" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vertical2_sellPage_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.67" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <View
         android:id="@+id/divider_sellPage"
@@ -87,15 +69,6 @@
         app:layout_constraintTop_toTopOf="@+id/horizontal2_sellPage_guideline"
         tools:layout_editor_absoluteX="205dp"
         tools:layout_editor_absoluteY="445dp" />
-
-    <View
-        android:id="@+id/divider2_sellPage"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/vertical2_sellPage_guideline"
-        app:layout_constraintTop_toTopOf="@+id/horizontal2_sellPage_guideline" />
 
     <ImageButton
         android:id="@+id/settings_sellPageBtn"

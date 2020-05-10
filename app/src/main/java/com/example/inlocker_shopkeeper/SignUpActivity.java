@@ -56,9 +56,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     progressBar.setVisibility(View.GONE);
                     if(task.isSuccessful()){
-                        Intent toMenu = new Intent(SignUpActivity.this, SellPageActivity.class);
+                        Intent toMain = new Intent(SignUpActivity.this, MainActivity.class);
                         getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(toMenu);
+                        startActivity(toMain);
                     }
                     else{
                         if(task.getException() instanceof FirebaseAuthUserCollisionException){

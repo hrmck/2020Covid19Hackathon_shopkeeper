@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:cardBackgroundColor="@color/red"
     tools:context=".NewUploadItemActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,8 +13,8 @@
 
         <EditText
             android:id="@+id/itemName_NewUploadItem_editText"
+            style="@style/customEditText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/itemName"
             android:inputType="textPersonName"
@@ -24,9 +25,9 @@
 
         <EditText
             android:id="@+id/itemPrice_NewUploadItem_editText"
+            style="@style/customEditText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/itemPrice"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,23 +35,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemName_NewUploadItem_editText" />
 
+        <EditText
+            android:id="@+id/itemAmount_NewUploadItem_editText"
+            style="@style/customEditText"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/itemAmount"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemPrice_NewUploadItem_editText" />
+
         <Button
             android:id="@+id/itemClear_NewUploadItemBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="@string/itemClearContents"
+            app:layout_constraintBottom_toBottomOf="@+id/itemSave_NewUploadItemBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/itemSave_NewUploadItemBtn"
-            app:layout_constraintTop_toBottomOf="@+id/itemCategory_NewUploadItem_spinner" />
+            app:layout_constraintTop_toTopOf="@+id/itemSave_NewUploadItemBtn" />
 
         <Button
             android:id="@+id/itemSave_NewUploadItemBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="@string/itemSave"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/itemClear_NewUploadItemBtn"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,10 +74,23 @@
             android:id="@+id/itemCategory_NewUploadItem_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="@+id/itemPrice_NewUploadItem_editText"
-            app:layout_constraintStart_toStartOf="@+id/itemPrice_NewUploadItem_editText"
-            app:layout_constraintTop_toBottomOf="@+id/itemPrice_NewUploadItem_editText" />
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/itemAmount_NewUploadItem_editText"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/itemAmount_NewUploadItem_editText"
+            app:layout_constraintTop_toBottomOf="@+id/itemAmount_NewUploadItem_editText" />
+
+        <ProgressBar
+            android:id="@+id/NewUploadItem_progressBar"
+            style="@style/customProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

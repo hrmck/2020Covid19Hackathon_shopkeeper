@@ -9,8 +9,8 @@
     <string name="sign_up">Sign-up</string>
     <string name="emailAdr">Email address</string>
 
-    <string name="view_store">View Store</string>
-    <string name="edit_store">Edit Store</string>
+    <string name="view_edit_item">View &amp; Edit Items</string>
+    <!-- <string name="edit_store">Edit Store</string> -->
     <string name="finished_order">Finished Orders</string>
 
     <string name="preview">Preview</string>
@@ -24,6 +24,7 @@
 
     <string name="itemName">Item name</string>
     <string name="itemPrice">Item price</string>
+    <string name="itemAmount">Item amount</string>
     <string-array name="itemCategory">
         <item>--Please choose--</item>
         <item>Drinks</item>

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SellPageActivity extends AppCompatActivity implements View.OnClickListener {
-    Button toSellerUpload, toSellerView, toFinishedOrder;
+    Button toSellerView, toFinishedOrder;
     ImageButton toSettings;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,12 +18,10 @@ public class SellPageActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_sell_page);
 
         //as no. of buttons is too many this time...
-        toSellerUpload = findViewById(R.id.toSellerUpload_sellPageBtn);
         toSellerView = findViewById(R.id.toSellerView_sellPageBtn);
         toFinishedOrder = findViewById(R.id.toFinishedOrders_sellPageBtn);
         toSettings = findViewById(R.id.settings_sellPageBtn);
 
-        toSellerUpload.setOnClickListener(this);
         toSellerView.setOnClickListener(this);
         toFinishedOrder.setOnClickListener(this);
         toSettings.setOnClickListener(this);
@@ -34,9 +32,6 @@ public class SellPageActivity extends AppCompatActivity implements View.OnClickL
         Intent fromSellPageActivity = null;
 
         switch(v.getId()){
-            case R.id.toSellerUpload_sellPageBtn:
-                fromSellPageActivity = new Intent(this, SellerUploadActivity.class);
-                break;
             case R.id.toSellerView_sellPageBtn:
                 fromSellPageActivity = new Intent(this, SellerViewActivity.class);
                 break;
