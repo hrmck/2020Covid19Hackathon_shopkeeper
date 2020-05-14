@@ -2,6 +2,7 @@ package com.example.inlocker_shopkeeper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,17 +36,19 @@ import java.util.Map;
 
 public class SetStoreInfoActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SetStoreInfoAcitivity >> ";
+    private String uid;
+
     EditText editTextStoreName, editTextStorePhoneNo, editTextStoreAddr;
     Button saveInfo;
     ProgressBar progressBar;
     ImageView trademarkImageView;
 
-    FirebaseUser user;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-    DocumentReference documentReference;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-    StorageReference trademarkRef;
+    private FirebaseUser user;
+    private DocumentReference documentReference;
+    private StorageReference trademarkRef;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,7 +74,7 @@ public class SetStoreInfoActivity extends AppCompatActivity implements View.OnCl
         }
 
         //initialize for connection to Firestore
-        String uid = user.getUid();
+        uid = user.getUid();
         documentReference = fStore.collection("storeList").document(uid);
         trademarkRef = storageReference.child("storeList/" + uid + "/profile.jpg");
 
@@ -108,6 +112,16 @@ public class SetStoreInfoActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).into(trademarkImageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                int colorBlack = getResources().getColor(R.color.black);
+                int colorWhite = getResources().getColor(R.color.white);
+                Drawable trademarkDemo = TextDrawable.builder()
+                        .beginConfig().fontSize(45).textColor(colorBlack).endConfig()
+                        .buildRect("Click here to set store logo", colorWhite);
+                trademarkImageView.setImageDrawable(trademarkDemo);
             }
         });
     }
