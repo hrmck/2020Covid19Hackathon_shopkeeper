@@ -72,7 +72,7 @@ public class SetStoreInfoActivity extends AppCompatActivity implements View.OnCl
         //initialize for connection to Firestore
         String uid = user.getUid();
         documentReference = fStore.collection("storeList").document(uid);
-        trademarkRef = storageReference.child("buyerList/" + uid + "/profile.jpg");
+        trademarkRef = storageReference.child("storeList/" + uid + "/profile.jpg");
 
         //load store info if exist
         retrieveStoreInfoIfExist();
