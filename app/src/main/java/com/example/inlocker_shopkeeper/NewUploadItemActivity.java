@@ -166,7 +166,7 @@ public class NewUploadItemActivity extends AppCompatActivity
                                 "New item added successfully", Toast.LENGTH_SHORT).show();
                         //go back to seller view
                         Intent intent = new Intent(getApplicationContext(), SellerViewActivity.class);
-                        getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 })

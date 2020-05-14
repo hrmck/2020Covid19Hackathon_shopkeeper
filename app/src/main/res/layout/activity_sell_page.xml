@@ -24,10 +24,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/bone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/horizontal2_sellPage_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontal1_sellPage_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/horizontal1_sellPage_guideline"
+        tools:itemCount="0" />
 
     <Button
         android:id="@+id/toSellerView_sellPageBtn"
@@ -82,5 +84,16 @@
         android:tint="@color/bone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Incoming orders will be displayed here"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal2_sellPage_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal1_sellPage_guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

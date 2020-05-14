@@ -45,6 +45,7 @@ public class SellPageActivity extends AppCompatActivity implements View.OnClickL
                 //do nothing
                 break;
         }
+        fromSellPageActivity.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         startActivity(fromSellPageActivity);
     }
 }

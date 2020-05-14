@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()){
                         Intent toMenu = new Intent(LoginActivity.this, SellPageActivity.class);
-                        getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        toMenu.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(toMenu);
                     }
                     else{
