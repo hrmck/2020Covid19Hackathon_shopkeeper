@@ -26,6 +26,7 @@
         <activity
             android:name=".NewUploadItemActivity"
             android:theme="@style/customDialog" />
+        <activity android:name=".EditCategoriesActivity" />
     </application>
 
 </manifest>

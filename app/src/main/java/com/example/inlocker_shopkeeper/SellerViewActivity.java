@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,13 +22,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,7 +41,8 @@ import com.squareup.picasso.Picasso;
 public class SellerViewActivity extends AppCompatActivity implements View.OnClickListener {
     private String uid;
 
-    Button toAddNewItem;
+    Button toAddNewItem, toEditCategory;
+    Button[] categoryBtns;
     TextView textViewStoreName;
     ImageView imageViewStoreImage;
 
@@ -45,6 +51,7 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private FirebaseUser user;
     private CollectionReference productListRef;
+    private CollectionReference categoryListRef;
     private StorageReference storeImageRef;
 
     private StoreItemAdapter adapter;
@@ -55,8 +62,16 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_seller_view);
 
         toAddNewItem = findViewById(R.id.addNewItem_sellerViewBtn);
+        toEditCategory = findViewById(R.id.editCategoriesBtn);
         imageViewStoreImage = findViewById(R.id.storePic_sellerView_imageView);
         textViewStoreName = findViewById(R.id.storeName_sellerView_textView);
+
+        categoryBtns = new Button[5];
+        categoryBtns[0] = findViewById(R.id.category1_sellerViewBtn);
+        categoryBtns[1] = findViewById(R.id.category2_sellerViewBtn);
+        categoryBtns[2] = findViewById(R.id.category3_sellerViewBtn);
+        categoryBtns[3] = findViewById(R.id.category4_sellerViewBtn);
+        categoryBtns[4] = findViewById(R.id.category5_sellerViewBtn);
 
         user = fAuth.getCurrentUser();
         if (user == null) {
@@ -70,14 +85,44 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
 
         uid = user.getUid();
         productListRef = db.collection("storeList").document(uid).collection("Products");
+        categoryListRef = db.collection("storeList").document(uid).collection("Category");
         storeImageRef = storageReference.child("storeList/" + uid + "/storeImage.jpg");
 
         setStoreImage();
         setStoreName();
+        //setStoreCategories();
+        setStoreCategoryButton();
         setUpRecyclerView();
 
         toAddNewItem.setOnClickListener(this);
+        toEditCategory.setOnClickListener(this);
         imageViewStoreImage.setOnClickListener(this);
+    }
+
+    private void setStoreCategoryButton() {
+        setStoreCategories();
+        if (!TextUtils.isEmpty(categoryBtns[0].getText().toString())) {
+            return;
+        }
+        for (Button categoryBtn : categoryBtns) {
+            categoryBtn.setText("none");
+        }
+    }
+
+    private void setStoreCategories() {
+        categoryListRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int ix = 0;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        categoryBtns[ix].setText(document.getString("CategoryName" + ix));
+                        ix++;
+                        if (ix > categoryBtns.length) break;
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -89,6 +134,10 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.storePic_sellerView_imageView:
                 chooseStoreImage();
+                break;
+            case R.id.editCategoriesBtn:
+                Intent intent1 = new Intent(this, EditCategoriesActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

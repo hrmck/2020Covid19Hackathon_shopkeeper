@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -54,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/vertical2_inner_sellerView_guideline"
@@ -101,6 +100,68 @@
             app:layout_constraintStart_toStartOf="@+id/vertical1_inner_sellerView_guideline"
             app:layout_constraintTop_toTopOf="@+id/horizontal1_inner_sellerView_guideline" />
 
+        <Button
+            android:id="@+id/category1_sellerViewBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:autoSizeTextType="none"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeMaxTextSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/category2_sellerViewBtn"
+            app:layout_constraintEnd_toStartOf="@+id/vertical1_inner_sellerView_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/horizontal1_inner_sellerView_guideline" />
+
+        <Button
+            android:id="@+id/category2_sellerViewBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:autoSizeTextType="none"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeMaxTextSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/category3_sellerViewBtn"
+            app:layout_constraintEnd_toStartOf="@+id/vertical1_inner_sellerView_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category1_sellerViewBtn" />
+
+        <Button
+            android:id="@+id/category3_sellerViewBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:autoSizeTextType="none"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeMaxTextSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/category4_sellerViewBtn"
+            app:layout_constraintEnd_toStartOf="@+id/vertical1_inner_sellerView_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category2_sellerViewBtn" />
+
+        <Button
+            android:id="@+id/category4_sellerViewBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:autoSizeTextType="none"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeMaxTextSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/category5_sellerViewBtn"
+            app:layout_constraintEnd_toStartOf="@+id/vertical1_inner_sellerView_guideline"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category3_sellerViewBtn" />
+
+        <Button
+            android:id="@+id/category5_sellerViewBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:autoSizeTextType="none"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeMaxTextSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vertical1_inner_sellerView_guideline"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category4_sellerViewBtn" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -110,7 +171,19 @@
         android:text="@string/addNewItem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical1_sellerView_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editCategoriesBtn"
         app:layout_constraintTop_toBottomOf="@+id/whiteBg_sellerView_constraintLayout" />
+
+    <Button
+        android:id="@+id/editCategoriesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editCategory"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addNewItem_sellerViewBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal2_sellerView_guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

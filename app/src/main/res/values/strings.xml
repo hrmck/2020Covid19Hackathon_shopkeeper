@@ -15,7 +15,9 @@
 
     <string name="preview">Preview</string>
     <string name="addNewItem">Add New Product</string>
-    <string name="storeImage">Change\nStore Image</string>
+    <string name="editCategory">Edit Categories</string>
+
+    <string name="saveCategory">Save Category</string>
 
     <string name="storeInfo">Store Info</string>
     <string name="saveInfo">Save Info</string>

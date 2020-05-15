@@ -175,7 +175,7 @@ public class SetStoreInfoActivity extends AppCompatActivity implements View.OnCl
                 progressBar.setVisibility(View.GONE);
                 Log.d(TAG, "onFailure" + e.toString());
                 Toast.makeText(getApplicationContext(),
-                        "Info saved failed: " + e.toString(), Toast.LENGTH_SHORT).show();
+                        "Info save failed: " + e.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
