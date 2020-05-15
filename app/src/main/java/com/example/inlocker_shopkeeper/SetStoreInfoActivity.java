@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -158,7 +159,7 @@ public class SetStoreInfoActivity extends AppCompatActivity implements View.OnCl
         store.put("PhoneNo", storePhoneNo);
         store.put("Address", storeAddr);
 
-        documentReference.set(store).addOnSuccessListener(new OnSuccessListener<Void>() {
+        documentReference.set(store, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 progressBar.setVisibility(View.GONE);
@@ -190,7 +191,7 @@ public class SetStoreInfoActivity extends AppCompatActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
-            if (resultCode == Activity.RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
                 Uri imageUri = data.getData();
                 uploadImageToFirebase(imageUri);
             }
@@ -205,7 +206,16 @@ public class SetStoreInfoActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onSuccess(Uri uri) {
                         Picasso.get().load(uri).into(trademarkImageView);
-                        Toast.makeText(getApplicationContext(), "Logo Uploaded", Toast.LENGTH_SHORT).show();
+
+                        Map<String, Object> logoLink = new HashMap<>();
+                        logoLink.put("logoImageLink", uri.toString());
+
+                        documentReference.set(logoLink, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "Logo Uploaded", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }

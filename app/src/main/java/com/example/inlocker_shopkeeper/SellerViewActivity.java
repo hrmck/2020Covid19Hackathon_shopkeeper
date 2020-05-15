@@ -33,10 +33,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SellerViewActivity extends AppCompatActivity implements View.OnClickListener {
     private String uid;
@@ -166,7 +170,17 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onSuccess(Uri uri) {
                         Picasso.get().load(uri).into(imageViewStoreImage);
-                        Toast.makeText(getApplicationContext(), "Store Image Uploaded", Toast.LENGTH_SHORT).show();
+
+                        Map<String, Object> storeImageLink = new HashMap<>();
+                        storeImageLink.put("storeImageLink", uri.toString());
+
+                        db.collection("storeList").document(uid)
+                                .set(storeImageLink, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "Store Image Uploaded", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }
