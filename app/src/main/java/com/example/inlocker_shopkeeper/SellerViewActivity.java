@@ -22,23 +22,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,8 +52,8 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private FirebaseUser user;
+    private DocumentReference storeDocumentRef;
     private CollectionReference productListRef;
-    private CollectionReference categoryListRef;
     private StorageReference storeImageRef;
 
     private StoreItemAdapter adapter;
@@ -88,13 +86,12 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
         }
 
         uid = user.getUid();
-        productListRef = db.collection("storeList").document(uid).collection("Products");
-        categoryListRef = db.collection("storeList").document(uid).collection("Category");
+        storeDocumentRef = db.collection("storeList").document(uid);
+        productListRef = storeDocumentRef.collection("Products");
         storeImageRef = storageReference.child("storeList/" + uid + "/storeImage.jpg");
 
         setStoreImage();
         setStoreName();
-        //setStoreCategories();
         setStoreCategoryButton();
         setUpRecyclerView();
 
@@ -114,16 +111,12 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void setStoreCategories() {
-        categoryListRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        storeDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    int ix = 0;
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        categoryBtns[ix].setText(document.getString("CategoryName" + ix));
-                        ix++;
-                        if (ix > categoryBtns.length) break;
-                    }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ArrayList results = (ArrayList) documentSnapshot.get("categories");
+                for (int ix = 0; ix < categoryBtns.length; ix++) {
+                    categoryBtns[ix].setText(results.get(ix).toString());
                 }
             }
         });

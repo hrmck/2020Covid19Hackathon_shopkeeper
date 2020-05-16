@@ -13,19 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EditCategoriesActivity extends AppCompatActivity implements View.OnClickListener {
@@ -35,7 +36,7 @@ public class EditCategoriesActivity extends AppCompatActivity implements View.On
 
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-    private CollectionReference storeCategoryRef;
+    private DocumentReference storeDocuememtRef;
     private FirebaseUser user;
 
     String uid;
@@ -59,7 +60,7 @@ public class EditCategoriesActivity extends AppCompatActivity implements View.On
 
         user = fAuth.getCurrentUser();
         uid = user.getUid();
-        storeCategoryRef = fStore.collection("storeList").document(uid).collection("Category");
+        storeDocuememtRef = fStore.collection("storeList").document(uid);
 
         setEditText();
         progressBar.setVisibility(View.GONE);
@@ -74,31 +75,33 @@ public class EditCategoriesActivity extends AppCompatActivity implements View.On
 
     private void uploadCategoriesToFirestore() {
         progressBar.setVisibility(View.VISIBLE);
-        String categoryString[] = new String[5];
-        int ix = 0;
-        WriteBatch batch = fStore.batch();
-        for (String fromEditText : categoryString) {
-            String title = "CategoryName" + ix;
-            fromEditText = category[ix].getText().toString();
+        String categoryString[] = new String[category.length];
 
-            Map<String, Object> storeCategoryEntry = new HashMap<>();
-            storeCategoryEntry.put(title, fromEditText);
-            batch.set(storeCategoryRef.document(title), storeCategoryEntry);
-            ix++;
+        WriteBatch batch = fStore.batch();
+
+        for (int ix = 0; ix < category.length; ix++) {
+            categoryString[ix] = category[ix].getText().toString();
         }
-        batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(),
-                        "Categories saved successfully\n Going back to store view",
-                        Toast.LENGTH_SHORT).show();
-                Intent toSellerView = new Intent(getApplicationContext(), SellerViewActivity.class);
-                startActivity(toSellerView);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+
+        List<String> categories = Arrays.asList(categoryString);
+        Map<String, Object> storeCategoryEntry = new HashMap<>();
+        storeCategoryEntry.put("categories", categories);
+
+        storeDocuememtRef.set(storeCategoryEntry, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(),
+                                "Categories saved successfully\n Going back to store view",
+                                Toast.LENGTH_SHORT).show();
+                        Intent toSellerView = new Intent(getApplicationContext(), SellerViewActivity.class);
+                        startActivity(toSellerView);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(),
                         "Categories save failed: " + e.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -117,19 +120,14 @@ public class EditCategoriesActivity extends AppCompatActivity implements View.On
     }
 
     private void storeHasSavedCategories() {
-        storeCategoryRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        storeDocuememtRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    int ix = 0;
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        category[ix].setText(document.getString("CategoryName" + ix));
-                        ix++;
-                    }
-
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ArrayList results = (ArrayList) documentSnapshot.get("categories");
+                for (int ix = 0; ix < category.length; ix++) {
+                    category[ix].setText(results.get(ix).toString());
                 }
             }
         });
     }
-
 }
