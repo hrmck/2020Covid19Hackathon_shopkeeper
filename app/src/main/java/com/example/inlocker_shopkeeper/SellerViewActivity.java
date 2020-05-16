@@ -70,6 +70,7 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
         textViewStoreName = findViewById(R.id.storeName_sellerView_textView);
 
         toAddNewItem.setEnabled(false);
+        toEditCategory.setEnabled(false);
 
         categoryBtns = new Button[5];
         categoryBtns[0] = findViewById(R.id.category1_sellerViewBtn);
@@ -111,6 +112,7 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
         for (Button categoryBtn : categoryBtns) {
             categoryBtn.setText("none");
         }
+        toEditCategory.setEnabled(true);
         toAddNewItem.setEnabled(true);
     }
 
@@ -119,6 +121,9 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 ArrayList results = (ArrayList) documentSnapshot.get("categories");
+                if (results == null) {
+                    return;
+                }
                 categoryFromFirestore = new String[results.size() + 1];
                 categoryFromFirestore[0] = "Please choose category";
                 for (int ix = 0; ix < categoryBtns.length; ix++) {

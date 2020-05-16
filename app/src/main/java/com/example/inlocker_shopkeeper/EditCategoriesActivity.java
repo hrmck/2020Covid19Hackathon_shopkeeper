@@ -124,6 +124,9 @@ public class EditCategoriesActivity extends AppCompatActivity implements View.On
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 ArrayList results = (ArrayList) documentSnapshot.get("categories");
+                if (results == null) {
+                    return;
+                }
                 for (int ix = 0; ix < category.length; ix++) {
                     category[ix].setText(results.get(ix).toString());
                 }
