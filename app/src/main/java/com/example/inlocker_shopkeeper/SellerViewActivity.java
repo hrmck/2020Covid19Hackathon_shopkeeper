@@ -138,6 +138,10 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addNewItem_sellerViewBtn:
+                if (categoryFromFirestore == null) {
+                    Toast.makeText(getApplicationContext(), "No categories set. Please set categories first.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(this, NewUploadItemActivity.class);
                 intent.putExtra("categories", categoryFromFirestore);
                 startActivity(intent);
