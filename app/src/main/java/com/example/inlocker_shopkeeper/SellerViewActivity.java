@@ -42,6 +42,7 @@ import java.util.Map;
 
 public class SellerViewActivity extends AppCompatActivity implements View.OnClickListener {
     private String uid;
+    String[] categoryFromFirestore;
 
     Button toAddNewItem, toEditCategory;
     Button[] categoryBtns;
@@ -67,6 +68,8 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
         toEditCategory = findViewById(R.id.editCategoriesBtn);
         imageViewStoreImage = findViewById(R.id.storePic_sellerView_imageView);
         textViewStoreName = findViewById(R.id.storeName_sellerView_textView);
+
+        toAddNewItem.setEnabled(false);
 
         categoryBtns = new Button[5];
         categoryBtns[0] = findViewById(R.id.category1_sellerViewBtn);
@@ -108,6 +111,7 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
         for (Button categoryBtn : categoryBtns) {
             categoryBtn.setText("none");
         }
+        toAddNewItem.setEnabled(true);
     }
 
     private void setStoreCategories() {
@@ -115,8 +119,11 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 ArrayList results = (ArrayList) documentSnapshot.get("categories");
+                categoryFromFirestore = new String[results.size() + 1];
+                categoryFromFirestore[0] = "Please choose category";
                 for (int ix = 0; ix < categoryBtns.length; ix++) {
                     categoryBtns[ix].setText(results.get(ix).toString());
+                    categoryFromFirestore[ix + 1] = results.get(ix).toString();
                 }
             }
         });
@@ -127,6 +134,7 @@ public class SellerViewActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.addNewItem_sellerViewBtn:
                 Intent intent = new Intent(this, NewUploadItemActivity.class);
+                intent.putExtra("categories", categoryFromFirestore);
                 startActivity(intent);
                 break;
             case R.id.storePic_sellerView_imageView:

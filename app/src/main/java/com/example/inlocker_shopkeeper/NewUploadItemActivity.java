@@ -34,11 +34,13 @@ public class NewUploadItemActivity extends AppCompatActivity
     EditText editTextItemName, editTextItemPrice, editTextItemAmount;
     Button btnItemSave, btnItemClear;
     String chosenCategory, uid;
+    public String[] categoryFromFirestore;
     ProgressBar progressBar;
 
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FirebaseUser user;
+    DocumentReference storeDocumentRef;
     CollectionReference collectionProduct;
 
     @Override
@@ -59,7 +61,8 @@ public class NewUploadItemActivity extends AppCompatActivity
         user = fAuth.getCurrentUser();
         //assume logged in
         uid = user.getUid();
-        collectionProduct = fStore.collection("storeList").document(uid).collection("Products");
+        storeDocumentRef = fStore.collection("storeList").document(uid);
+        collectionProduct = storeDocumentRef.collection("Products");
 
         editTextItemName = findViewById(R.id.itemName_NewUploadItem_editText);
         editTextItemPrice = findViewById(R.id.itemPrice_NewUploadItem_editText);
@@ -70,13 +73,40 @@ public class NewUploadItemActivity extends AppCompatActivity
         btnItemSave.setOnClickListener(this);
         btnItemClear.setOnClickListener(this);
 
+        Bundle extras = getIntent().getExtras();
+        categoryFromFirestore = extras.getStringArray("categories");
+
         spinner = findViewById(R.id.itemCategory_NewUploadItem_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.itemCategory, R.layout.spinner_item);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.spinner_item, categoryFromFirestore);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.itemCategory, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_drop_down_item);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(this);
     }
+    /*
+    private void getCategories() {
+        storeDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ArrayList results = (ArrayList) documentSnapshot.get("categories");
+                categoryFromFirestore = new String[results.size() + 1];
+                categoryFromFirestore[0] = "please choose category";
+                for (int ix = 0; ix < results.size(); ix++){
+                    categoryFromFirestore[ix + 1] = results.get(ix).toString();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "No category has been set, back to last page...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), SellerViewActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+     */
 
     //Spinner functions
     @Override
